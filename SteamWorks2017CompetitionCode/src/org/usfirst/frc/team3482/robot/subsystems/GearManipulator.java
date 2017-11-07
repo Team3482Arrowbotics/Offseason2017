@@ -44,24 +44,11 @@ public class GearManipulator extends Subsystem {
 		manipDoors.setP(0.3);
 		manipDoors.setI(0.0);
 		manipDoors.setD(0.0);
-		//startPosition = manipDoors.getPosition();
 	}
-	
-//	public void openGearManipDoors() {
-//		manipDoors.changeControlMode(TalonControlMode.Position);
-//		manipDoors.set(15); // random value for testing
-//							// don't know actual open position
-//	}
-//	
-//	public void closeGearManipDoors() {
-//		manipDoors.changeControlMode(TalonControlMode.Position);
-//		manipDoors.set(startPosition);
-//	}
-	
+
 	public void moveGearManipStartPos() {
 		manipulatorTalon.changeControlMode(TalonControlMode.Position);
 		manipulatorTalon.set(startPosition);
-		//System.out.println("Move Gear Manip Start position " + startPosition);
 	}
 	
 	public void moveGearManipReadyPos() {
@@ -75,13 +62,6 @@ public class GearManipulator extends Subsystem {
 		System.out.println("Move Gear Manip " + (startPosition - pos.angle()));
 	}
 
-	//public void spinGearManipWheels(int direction) {
-	//	manipulatorTalonWheels.set(0.4 * direction);
-	//}
-
-	//public void stopGearManipWheels() {
-	//	manipulatorTalonWheels.set(0.0);
-	//}
 
 	public double getGearManipPosition() {
 		manipulatorTalon.changeControlMode(TalonControlMode.Position);

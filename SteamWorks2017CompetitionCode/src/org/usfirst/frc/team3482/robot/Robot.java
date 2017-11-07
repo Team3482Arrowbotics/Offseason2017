@@ -9,7 +9,6 @@ import org.usfirst.frc.team3482.robot.commands.AutoMiddle;
 import org.usfirst.frc.team3482.robot.commands.autoOther;
 import org.usfirst.frc.team3482.robot.subsystems.Chassis;
 import org.usfirst.frc.team3482.robot.subsystems.GearManipulator;
-import org.usfirst.frc.team3482.robot.subsystems.RangeFinder;
 
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.FeedbackDeviceStatus;
@@ -19,7 +18,6 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -40,7 +38,6 @@ public class Robot extends IterativeRobot {
 	public static FeedbackDeviceStatus status;
 	public static Chassis chassis;
 	public static GearManipulator gearManipulator;
-	public static RangeFinder rangeFinder;
 	public static OI oi;
 	SendableChooser<Command> autoChooser;
 	public Command autonomousCommand;
@@ -51,7 +48,6 @@ public class Robot extends IterativeRobot {
 		status = RobotMap.gearManipulator.isSensorPresent(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		gearManipulator = new GearManipulator();
-		rangeFinder = new RangeFinder();
 		chassis = new Chassis();
 		
 		oi = new OI();
@@ -141,10 +137,7 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
-		//shooterSpeed = -0.075*(2 - (Robot.oi.getflightStick().getRawAxis(3) + 1)) - 0.6;
-		double sliderValue = -((1-Robot.oi.getflightStick().getRawAxis(3))/2);  //range 0 to -1
-		shooterSpeed=((sliderValue-1.5)/3); //range -.5 to -.833
+		shooterSpeed=(.6); //range -.5 to -.833
 		SmartDashboard.putNumber("Current Shooter Percentage: ", shooterSpeed);
 		
 		Robot.chassis.drive(Robot.oi.getxboxController());
@@ -154,10 +147,7 @@ public class Robot extends IterativeRobot {
 			Robot.chassis.stopClimb();
 		}
 		
-		SmartDashboard.putNumber("NavX", RobotMap.ahrs.getPitch());
 		SmartDashboard.putNumber("Shooter Speed: ", RobotMap.shooter.getSpeed());
-		SmartDashboard.putNumber("Front RangeFinder value: ", Robot.rangeFinder.getRange(RobotMap.rangeFinderFront));
-		SmartDashboard.putNumber("Back RangeFinder value: ", Robot.rangeFinder.getRange(RobotMap.rangeFinderBack));
 		SmartDashboard.putNumber("Gear Manipulator Position: ", Robot.gearManipulator.getGearManipPosition());
 	
 		SmartDashboard.putNumber("Feeder Speed: ", RobotMap.feeder.get());

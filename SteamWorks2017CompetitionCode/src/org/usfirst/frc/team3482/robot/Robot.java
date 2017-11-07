@@ -83,13 +83,10 @@ public class Robot extends IterativeRobot {
 			
 			Mat source = new Mat();
 			Mat flipped = new Mat();
-			//Mat output = new Mat();
 			
 			while(!Thread.interrupted()) {
 				cvSink.grabFrame(source);
 				Core.flip(source, flipped, -1);
-				Imgproc.line(flipped, new Point(320, 0), new Point(320, 480), new Scalar(0, 255, 0), 6);
-				Imgproc.line(flipped, new Point(0, 240), new Point(640, 240), new Scalar(0, 255, 0), 6);
 				outputStream.putFrame(flipped);
 			}		
 		}).start();

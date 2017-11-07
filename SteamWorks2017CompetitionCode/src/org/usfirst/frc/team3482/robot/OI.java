@@ -1,15 +1,12 @@
 package org.usfirst.frc.team3482.robot;
 
-import org.usfirst.frc.team3482.robot.commands.FeedBalls;
 import org.usfirst.frc.team3482.robot.commands.IntakeBalls;
-//import org.usfirst.frc.team3482.robot.commands.MoveGearManipDoors;
 import org.usfirst.frc.team3482.robot.commands.ReverseFeed;
+import org.usfirst.frc.team3482.robot.commands.ReverseGearManipWheels;
 import org.usfirst.frc.team3482.robot.commands.RotateManipulator;
 import org.usfirst.frc.team3482.robot.commands.RunGearManipWheels;
-import org.usfirst.frc.team3482.robot.commands.ReverseGearManipWheels;
 import org.usfirst.frc.team3482.robot.commands.Shoot;
 import org.usfirst.frc.team3482.robot.subsystems.ManipulatorPosition;
-import org.usfirst.frc.team3482.robot.subsystems.WheelDirection;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

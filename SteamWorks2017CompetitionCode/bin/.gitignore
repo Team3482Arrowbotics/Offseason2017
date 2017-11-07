@@ -1,2 +1,5 @@
 /org/
 *.class
+/dist/
+/bin/
+/sysProps.xml

@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shoot extends Command {
 	CANTalon shooterMotor = RobotMap.shooter;
-	//private double speedThreshold = -72000;
-	private double waitLoop = 0;
+	private double waitLoop;
+	
 	protected void initialize() {
 		waitLoop = 0;
 	}
@@ -19,7 +19,7 @@ public class Shoot extends Command {
 	protected void execute() {
 		Robot.chassis.prepareShoot();
 		waitLoop ++;
-		if(/*(shooterMotor.getSpeed() < speedThreshold) && */(waitLoop > 120)) {
+		if(waitLoop > 120) {
 			Robot.chassis.startFeed();
 			SmartDashboard.putNumber("Current Shooter Percentage", RobotMap.shooter.get());
 		}
@@ -30,7 +30,6 @@ public class Shoot extends Command {
 	}
 	
 	protected void end() {
-		Robot.chassis.stopPrepareShoot();
 		Robot.chassis.stopFeed();
 	}
 	

@@ -1,24 +1,17 @@
 package org.usfirst.frc.team3482.robot.subsystems;
-
-import org.usfirst.frc.team3482.robot.Robot;
 import org.usfirst.frc.team3482.robot.RobotMap;
-
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearManipulator extends Subsystem {
 	
+	public static final double PEG = -0.3;
 	public static double startPosition;
+	
 	public CANTalon manipulatorTalon = RobotMap.gearManipulator;
-	public CANTalon manipulatorTalonWheels = RobotMap.gearManipulatorWheels;
-	public CANTalon manipDoors = RobotMap.gearManipDoors;
-	public static Button toggleWheelsButton;
-
+	
 	public GearManipulator() {
 		manipulatorTalon.changeControlMode(TalonControlMode.Position);
 		manipulatorTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
@@ -32,18 +25,6 @@ public class GearManipulator extends Subsystem {
 		manipulatorTalon.setI(0.0);//0
 		manipulatorTalon.setD(0.0);//0
 		startPosition = manipulatorTalon.getPosition();
-		
-		manipDoors.changeControlMode(TalonControlMode.Position);
-		manipDoors.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		manipDoors.reverseSensor(false);
-		manipDoors.configNominalOutputVoltage(+0f, -0f);
-		manipDoors.configPeakOutputVoltage(+12f, -12f);
-		manipDoors.setAllowableClosedLoopErr(0);
-		manipDoors.setProfile(0);
-		manipDoors.setF(0.0);
-		manipDoors.setP(0.3);
-		manipDoors.setI(0.0);
-		manipDoors.setD(0.0);
 	}
 
 	public void moveGearManipStartPos() {
@@ -53,25 +34,12 @@ public class GearManipulator extends Subsystem {
 	
 	public void moveGearManipReadyPos() {
 		manipulatorTalon.changeControlMode(TalonControlMode.Position);
-		manipulatorTalon.set(startPosition + ManipulatorPosition.PEG.angle());
+		manipulatorTalon.set(startPosition + PEG);
 	}
-
-	public void moveGearManip(ManipulatorPosition pos) {
-		manipulatorTalon.changeControlMode(TalonControlMode.Position);
-		manipulatorTalon.set(startPosition - pos.angle());
-		System.out.println("Move Gear Manip " + (startPosition - pos.angle()));
-	}
-
 
 	public double getGearManipPosition() {
 		manipulatorTalon.changeControlMode(TalonControlMode.Position);
 		return manipulatorTalon.get();
-	}
-
-	public void moveGearManip(Joystick s) {
-		double flightStickAxisValue = s.getRawAxis(1);
-		manipulatorTalon.changeControlMode(TalonControlMode.Position);
-		manipulatorTalon.set(startPosition - (flightStickAxisValue / 4));
 	}
 
 	@Override

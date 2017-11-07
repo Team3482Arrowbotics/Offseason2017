@@ -6,8 +6,7 @@ import org.usfirst.frc.team3482.robot.commands.RotateManipulator;
 import org.usfirst.frc.team3482.robot.commands.RunGearManipWheels;
 import org.usfirst.frc.team3482.robot.commands.ReverseGearManipWheels;
 import org.usfirst.frc.team3482.robot.commands.Shoot;
-import org.usfirst.frc.team3482.robot.subsystems.ManipulatorPosition;
-
+import org.usfirst.frc.team3482.robot.commands.Climb;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -20,9 +19,10 @@ public class OI {
 	private static JoystickButton shootSequenceButton;
 	private static JoystickButton intakeBallsButton;
 	private static JoystickButton gearManipMoveButton;
-	public Joystick joystick;
-	private static JoystickButton reversePolyButton;
-	public static JoystickButton GearWheelsButton;
+	private static JoystickButton climbButton;
+	private static JoystickButton reverseFeedButton;
+	public static JoystickButton gearWheelsButton;
+	public static JoystickButton reverseGearWheelsButton;
 	
 	public OI () {
 		xboxController = new Joystick(0);
@@ -34,16 +34,19 @@ public class OI {
 		intakeBallsButton.whileHeld(new IntakeBalls());
 		
 		gearManipMoveButton = new JoystickButton(xboxController, 2);
-		gearManipMoveButton.whileHeld(new RotateManipulator(ManipulatorPosition.PEG));
+		gearManipMoveButton.whileHeld(new RotateManipulator());
 		
-		reversePolyButton = new JoystickButton(xboxController, 3); //button 3 is X
-		reversePolyButton.whileHeld(new ReverseFeed());
+		reverseFeedButton = new JoystickButton(xboxController, 3); //button 3 is X
+		reverseFeedButton.whileHeld(new ReverseFeed());
 		
-		reversePolyButton = new JoystickButton(xboxController, 4);  //button 4 is Y
-		reversePolyButton.whileHeld(new ReverseGearManipWheels());
+		reverseGearWheelsButton = new JoystickButton(xboxController, 4);  //button 4 is Y
+		reverseGearWheelsButton.whileHeld(new ReverseGearManipWheels());
 		
-		GearWheelsButton = new JoystickButton(xboxController, 1); //button 1 is A
-		GearWheelsButton.whileHeld(new RunGearManipWheels());
+		gearWheelsButton = new JoystickButton(xboxController, 1); //button 1 is A
+		gearWheelsButton.whileHeld(new RunGearManipWheels());
+		
+		climbButton = new JoystickButton(xboxController, 9); //button 9 is RT
+		climbButton.whileHeld(new Climb());	
 	}
 
 	public Joystick getxboxController () {

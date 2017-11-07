@@ -7,12 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Chassis extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 
 	private final RobotDrive robotDrive = RobotMap.driveRobot;
 	double turnSpeed = -0.75;
@@ -45,13 +40,6 @@ public class Chassis extends Subsystem {
 		//RobotMap.shooter.set(-0.075*(2 - (Robot.oi.getflightStick().getRawAxis(3) + 1)) - 0.6);
 		//RobotMap.shooter.set(-((1-Robot.oi.getflightStick().getRawAxis(3))/2));
 		RobotMap.shooter.set(Robot.shooterSpeed);
-	}
-	
-	public void stopPrepareShoot() {
-		RobotMap.feederBelts.set(0.0);
-		RobotMap.feederWheels.set(0.0);
-		RobotMap.shooter.set(0.0);
-		RobotMap.feeder.set(0.0);
 	}
 	
 	public void startFeed() {

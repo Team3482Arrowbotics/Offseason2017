@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3482.robot;
 
-//import org.usfirst.frc.team3482.robot.subsystems.TalonDrive;
-//import org.usfirst.frc.team3482.robot.subsystems.TurnPID;
 
 import com.ctre.CANTalon;
 //import com.kauailabs.navx.frc.AHRS;

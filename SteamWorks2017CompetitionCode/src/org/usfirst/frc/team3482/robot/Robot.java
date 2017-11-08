@@ -103,7 +103,13 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		chassis.drive(oi.xboxController);
 		
+		if(oi.xboxController.getRawAxis(3) > 0.1){
+			RobotMap.climber.set(-1);
+		} else{
+			RobotMap.climber.set(0);
+		}
 		
 		SmartDashboard.putNumber("Current Shooter Percentage: ", shooterSpeed);
 		SmartDashboard.putNumber("Gear Manipulator Position: ", Robot.gearManipulator.getGearManipPosition());

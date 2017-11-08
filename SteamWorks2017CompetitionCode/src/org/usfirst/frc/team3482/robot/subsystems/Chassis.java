@@ -6,6 +6,7 @@ import org.usfirst.frc.team3482.robot.RobotMap;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends Subsystem {
 
@@ -36,9 +37,11 @@ public class Chassis extends Subsystem {
 	public void changeFront(){
 		if(front==1){
 			front=-1;
+			SmartDashboard.putString("Robot Orientation", "Gear Forward");
 		}
 		else{
 			front=1;
+			SmartDashboard.putString("Robot Orientation", "Intake Forward");
 		}
 	}
 

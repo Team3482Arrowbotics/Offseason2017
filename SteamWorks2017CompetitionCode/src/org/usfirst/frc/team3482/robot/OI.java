@@ -6,7 +6,7 @@ import org.usfirst.frc.team3482.robot.commands.RotateManipulator;
 import org.usfirst.frc.team3482.robot.commands.RunGearManipWheels;
 import org.usfirst.frc.team3482.robot.commands.ReverseGearManipWheels;
 import org.usfirst.frc.team3482.robot.commands.Shoot;
-import org.usfirst.frc.team3482.robot.commands.Climb;
+import org.usfirst.frc.team3482.robot.commands.FlipDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -19,10 +19,10 @@ public class OI {
 	private static JoystickButton shootSequenceButton;
 	private static JoystickButton intakeBallsButton;
 	private static JoystickButton gearManipMoveButton;
-	private static JoystickButton climbButton;
 	private static JoystickButton reverseFeedButton;
 	public static JoystickButton gearWheelsButton;
 	public static JoystickButton reverseGearWheelsButton;
+	public static JoystickButton flipDriveButton;
 	
 	public OI () {
 		xboxController = new Joystick(0);
@@ -45,8 +45,8 @@ public class OI {
 		gearWheelsButton = new JoystickButton(xboxController, 1); //button 1 is A
 		gearWheelsButton.whileHeld(new RunGearManipWheels());
 		
-		climbButton = new JoystickButton(xboxController, 9); //button 9 is RT
-		climbButton.whileHeld(new Climb());	
+		flipDriveButton = new JoystickButton(xboxController, 8); //button 1 is Back
+		flipDriveButton.whenPressed(new FlipDrive());
 	}
 
 	public Joystick getxboxController () {

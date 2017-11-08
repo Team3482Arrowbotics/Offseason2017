@@ -1,11 +1,12 @@
 package org.usfirst.frc.team3482.robot.commands;
 
 import org.usfirst.frc.team3482.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Climb extends Command {
+public class FlipDrive extends Command {
 	protected void initialize() {
-		Robot.chassis.startClimb();
+		Robot.chassis.changeFront();
 	}
 	
 	protected void execute() {
@@ -13,11 +14,10 @@ public class Climb extends Command {
 	}
 	
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	
 	protected void end() {
-		Robot.chassis.stopClimb();
 	}
 	
 	protected void interrupted() {

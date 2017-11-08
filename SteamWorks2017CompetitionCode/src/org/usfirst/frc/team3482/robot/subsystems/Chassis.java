@@ -11,10 +11,11 @@ public class Chassis extends Subsystem {
 
 	private final RobotDrive robotDrive = RobotMap.driveRobot;
 	double turnSpeed = -0.75;
-
+	int front = 1;
+	
 	public void drive(Joystick s) {
 		double deadZone = 0.1;
-		double leftY = s.getRawAxis(1);
+		double leftY = s.getRawAxis(1)*front;
 		double rightX = s.getRawAxis(4);
 
 		if (leftY < deadZone && leftY > -deadZone) {
@@ -24,11 +25,20 @@ public class Chassis extends Subsystem {
 		if (rightX < deadZone && rightX > -deadZone) {
 			rightX = 0;
 		}
-
+		
 		if ((Robot.oi.xboxController.getRawAxis(2) != 0) && Robot.isDrive) {
 			robotDrive.arcadeDrive(leftY * 0.5, rightX * turnSpeed * 0.75);
 		} else if (Robot.isDrive){
 			robotDrive.arcadeDrive(leftY, rightX * turnSpeed);
+		}
+	}
+	
+	public void changeFront(){
+		if(front==1){
+			front=-1;
+		}
+		else{
+			front=1;
 		}
 	}
 
@@ -79,14 +89,6 @@ public class Chassis extends Subsystem {
 	
 	public void stopGearWheels() {
 		RobotMap.gearManipulatorWheels.set(0.0);
-	}
-	
-	public void startClimb() {
-		RobotMap.climber.set(-1.0);
-	}
-	
-	public void stopClimb() {
-		RobotMap.climber.set(0.0);
 	}
 
 	@Override

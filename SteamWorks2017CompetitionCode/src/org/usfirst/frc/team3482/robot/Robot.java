@@ -1,11 +1,4 @@
 package org.usfirst.frc.team3482.robot;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import org.usfirst.frc.team3482.robot.commands.AutoMiddle;
@@ -31,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	SendableChooser<Command> autoChooser;
 	public Command autonomousCommand;
-
+	
 	public void robotInit() {
 		
 		RobotMap.init();
@@ -47,30 +40,9 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("Middle Auto", new AutoMiddle());
 		SmartDashboard.putData("Auto mode", autoChooser);
 		
-		gearManipulator.moveGearManipReadyPos();
+		gearManipulator.moveGearManipReadyPos();	
 		
-//		new Thread(() -> {
-			cam = CameraServer.getInstance().startAutomaticCapture(0);
-//			cam.setBrightness(30);
-//			cam.setExposureHoldCurrent();
-//			cam.setExposureManual(5);
-//			cam.setResolution(640, 480);
-//			
-//			CvSink cvSink = CameraServer.getInstance().getVideo();
-//			CvSource outputStream = CameraServer.getInstance().putVideo("CrossHair", 640, 480);
-//			
-//			Mat source = new Mat();
-//			Mat flipped = new Mat();
-//			Mat output = new Mat();
-//			
-//			while(!Thread.interrupted()) {
-//				cvSink.grabFrame(source);
-//				Core.flip(source, flipped, -1);
-//				Imgproc.line(flipped, new Point(320, 0), new Point(320, 480), new Scalar(0, 255, 0), 6);
-//				Imgproc.line(flipped, new Point(0, 240), new Point(640, 240), new Scalar(0, 255, 0), 6);
-//				outputStream.putFrame(flipped);
-//			}		
-//		}).start();
+		cam = CameraServer.getInstance().startAutomaticCapture(0);
 	}
 
 	public void disabledInit() {

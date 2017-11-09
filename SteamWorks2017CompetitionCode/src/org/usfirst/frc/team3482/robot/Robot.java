@@ -14,6 +14,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/*
+ * This class is what actually runs in game
+ * 
+ * It defines what happens when the robot initializes and what it does while it runs
+ * 
+ */
+
 public class Robot extends IterativeRobot {
 	UsbCamera cam;
 	public static double shooterSpeed = 0.0;
@@ -43,16 +50,24 @@ public class Robot extends IterativeRobot {
 		gearManipulator.moveGearManipReadyPos();	
 		
 		cam = CameraServer.getInstance().startAutomaticCapture(0);
+		
+		
 	}
 
+	
+	
 	public void disabledInit() {
 		
 	}
+	
+	
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
+	
+	
 	public void autonomousInit() {
 		autonomousCommand = (Command) autoChooser.getSelected();
 		if (autonomousCommand != null){
@@ -60,13 +75,14 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
+	
+	
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
+	
+	
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
@@ -79,31 +95,29 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		chassis.drive(oi.xboxController);
 		
-		if(oi.xboxController.getRawAxis(3) > 0.1){
-			RobotMap.climber.set(-1);
+		if(oi.xboxController.getRawAxis(3) > 0.1){					//the right trigger isn't a button so we can't define it in OI
+			RobotMap.climber.set(-1);								//OI only runs once, we need to constantly check the value
 		} else{
 			RobotMap.climber.set(0);
 		}
 		
-		if(oi.xboxController.getRawAxis(6) == 1 && shooterSpeed>-1)
-		{
-			shooterSpeed-=.5;
-		}
-		else if(oi.xboxController.getRawAxis(6)==-1 && shooterSpeed<-.6)
-		{
-			shooterSpeed+=.5;
+		if(oi.xboxController.getPOV() == 0 && shooterSpeed>-.9)      //*EXPERIMENTAL*
+		{															 //*
+			shooterSpeed-=.25;										 //*Meant to raise/lower shooter speed using up/down on D Pad*
+		}															 //*Same as right trigger, isn't a button but a POV so it gives angles 0-315*
+		else if(oi.xboxController.getPOV()==180 && shooterSpeed<-.6) //*Up is 0, Right is 90, Down is 180, Left is 270, half intervals at 45 degrees from whole*
+		{															 //*
+			shooterSpeed+=.25;										 //*EXPERIMENTAL*
 		}
 		
-		SmartDashboard.putNumber("D-Pad: ",oi.xboxController.getRawAxis(6));
-		
+		SmartDashboard.putNumber("D-Pad: ", oi.xboxController.getPOV());         //Displays relevant info on SmartDashboard
 		SmartDashboard.putNumber("Current Shooter Percentage: ", shooterSpeed);
-		SmartDashboard.putNumber("Gear Manipulator Position: ", Robot.gearManipulator.getGearManipPosition());
+		SmartDashboard.putNumber("Gear Manipulator Position: ", Robot.gearManipulator.getGearManipPosition()); 
 	}
     
-	/**
-	 * This function is called periodically during test mode
-	 */
+	
+	
 	public void testPeriodic() {
-		LiveWindow.run();
+		LiveWindow.run();		    //this lets you change values manually for each CANTalon, moving motors without code
 	}
 }

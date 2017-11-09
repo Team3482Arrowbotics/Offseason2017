@@ -5,6 +5,9 @@ import org.usfirst.frc.team3482.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Calls on chassis to do actual legwork
+ * 
+ * Just connects xbox controller to chassis methods
  *
  */
 public class Drive extends Command {

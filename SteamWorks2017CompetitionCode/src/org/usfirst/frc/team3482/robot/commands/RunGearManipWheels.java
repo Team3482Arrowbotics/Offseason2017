@@ -3,9 +3,17 @@ package org.usfirst.frc.team3482.robot.commands;
 import org.usfirst.frc.team3482.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
+	/*
+	 * Spins wheels on gear box inwards
+	 * 
+	 * Used exclusively for picking up gears
+	 */
+
+
+
 public class RunGearManipWheels extends Command {
 	protected void initialize() {
-		Robot.chassis.startGearWheels();
+		Robot.gearManipulator.startGearWheels();
 	}
 	
 	protected void execute() {
@@ -17,7 +25,7 @@ public class RunGearManipWheels extends Command {
 	}
 	
 	protected void end() {
-		Robot.chassis.stopGearWheels();
+		Robot.gearManipulator.stopGearWheels();
 	}
 	
 	protected void interrupted() {

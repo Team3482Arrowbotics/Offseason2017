@@ -1,6 +1,14 @@
 package org.usfirst.frc.team3482.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+	/*
+	 * Drives forward, drops gear on peg, backs up
+	 * 
+	 * Runs in Autonomous mode when selected on SmartDashboard
+	 */
+
+
+
 public class AutoMiddle extends CommandGroup{
 	public AutoMiddle() {
 		addSequential(new AutoDrive(0.72, 0.8));

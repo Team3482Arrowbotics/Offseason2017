@@ -8,6 +8,14 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+	/*
+	 * Includes entire sequence for shooting, starts fly wheel then adds feed
+	 * 
+	 * Wait  loop ensures the wheel gets up to speed before balls start shooting
+	 */
+
+
+
 public class Shoot extends Command {
 	CANTalon shooterMotor = RobotMap.shooter;
 	private double waitLoop;

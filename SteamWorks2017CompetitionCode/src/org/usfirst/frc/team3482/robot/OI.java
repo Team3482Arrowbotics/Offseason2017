@@ -4,43 +4,45 @@ import org.usfirst.frc.team3482.robot.commands.IntakeBalls;
 import org.usfirst.frc.team3482.robot.commands.ReverseFeed;
 import org.usfirst.frc.team3482.robot.commands.RotateManipulator;
 import org.usfirst.frc.team3482.robot.commands.RunGearManipWheels;
-import org.usfirst.frc.team3482.robot.commands.ReverseGearManipWheels;
+import org.usfirst.frc.team3482.robot.commands.DropGear;
 import org.usfirst.frc.team3482.robot.commands.Shoot;
 import org.usfirst.frc.team3482.robot.commands.FlipDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * This class is used to connect all commands to the controller
+ * 
+ * Use this for setting up buttons and defining their usage
+ * 
  */
 public class OI {
 	public Joystick xboxController;
 	private static JoystickButton shootSequenceButton;
 	private static JoystickButton intakeBallsButton;
-	private static JoystickButton gearManipMoveButton;
+	private static JoystickButton rotateGearManipButton;
 	private static JoystickButton reverseFeedButton;
 	public static JoystickButton gearWheelsButton;
-	public static JoystickButton reverseGearWheelsButton;
+	public static JoystickButton dropGearButton;
 	public static JoystickButton flipDriveButton;
 	
 	public OI () {
 		xboxController = new Joystick(0);
 		
-		shootSequenceButton = new JoystickButton(xboxController, 6);
+		shootSequenceButton = new JoystickButton(xboxController, 6); //button 6 is Right Bumper
 		shootSequenceButton.whileHeld(new Shoot());
 		
-		intakeBallsButton = new JoystickButton(xboxController, 5);
+		intakeBallsButton = new JoystickButton(xboxController, 5); //button 5 is Left Bumper
 		intakeBallsButton.whileHeld(new IntakeBalls());
 		
-		gearManipMoveButton = new JoystickButton(xboxController, 2);
-		gearManipMoveButton.whileHeld(new RotateManipulator());
+		rotateGearManipButton = new JoystickButton(xboxController, 2); //button 2 is B
+		rotateGearManipButton.whileHeld(new RotateManipulator());
 		
 		reverseFeedButton = new JoystickButton(xboxController, 3); //button 3 is X
 		reverseFeedButton.whileHeld(new ReverseFeed());
 		
-		reverseGearWheelsButton = new JoystickButton(xboxController, 4);  //button 4 is Y
-		reverseGearWheelsButton.whileHeld(new ReverseGearManipWheels());
+		dropGearButton = new JoystickButton(xboxController, 4);  //button 4 is Y
+		dropGearButton.whileHeld(new DropGear());
 		
 		gearWheelsButton = new JoystickButton(xboxController, 1); //button 1 is A
 		gearWheelsButton.whileHeld(new RunGearManipWheels());

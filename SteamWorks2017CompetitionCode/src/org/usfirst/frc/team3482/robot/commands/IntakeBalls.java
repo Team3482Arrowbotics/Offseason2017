@@ -3,6 +3,11 @@ package org.usfirst.frc.team3482.robot.commands;
 import org.usfirst.frc.team3482.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
+	/*
+	 * Spins intake on front of robot
+	 */
+
+
 public class IntakeBalls extends Command {
 	protected void initialize() {
 		Robot.chassis.startIntake();

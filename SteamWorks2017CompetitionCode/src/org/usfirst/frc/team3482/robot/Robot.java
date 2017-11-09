@@ -70,8 +70,10 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-			shooterSpeed=-.6;
+			shooterSpeed=-.7;
 	}
+	
+	
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
@@ -82,6 +84,17 @@ public class Robot extends IterativeRobot {
 		} else{
 			RobotMap.climber.set(0);
 		}
+		
+		if(oi.xboxController.getRawAxis(6) == 1 && shooterSpeed>-1)
+		{
+			shooterSpeed-=.5;
+		}
+		else if(oi.xboxController.getRawAxis(6)==-1 && shooterSpeed<-.6)
+		{
+			shooterSpeed+=.5;
+		}
+		
+		SmartDashboard.putNumber("D-Pad: ",oi.xboxController.getRawAxis(6));
 		
 		SmartDashboard.putNumber("Current Shooter Percentage: ", shooterSpeed);
 		SmartDashboard.putNumber("Gear Manipulator Position: ", Robot.gearManipulator.getGearManipPosition());

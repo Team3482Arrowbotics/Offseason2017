@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ReverseGearManipWheels extends Command {
 	protected void initialize() {
 		Robot.chassis.reverseGearWheels();
+		Robot.gearManipulator.moveGearManipStartPos();
+
 	}
 	
 	protected void execute() {
@@ -18,6 +20,8 @@ public class ReverseGearManipWheels extends Command {
 	
 	protected void end() {
 		Robot.chassis.stopGearWheels();
+		Robot.gearManipulator.moveGearManipReadyPos();
+
 	}
 	
 	protected void interrupted() {

@@ -50,8 +50,6 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void prepareShoot() {
-		//RobotMap.shooter.set(-0.075*(2 - (Robot.oi.getflightStick().getRawAxis(3) + 1)) - 0.6);
-		//RobotMap.shooter.set(-((1-Robot.oi.getflightStick().getRawAxis(3))/2));
 		RobotMap.shooter.set(Robot.shooterSpeed);
 	}
 	

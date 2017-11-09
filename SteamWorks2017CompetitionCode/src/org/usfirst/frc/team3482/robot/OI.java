@@ -45,8 +45,8 @@ public class OI {
 		gearWheelsButton = new JoystickButton(xboxController, 1); //button 1 is A
 		gearWheelsButton.whileHeld(new RunGearManipWheels());
 		
-		flipDriveButton = new JoystickButton(xboxController, 8); //button 1 is Back
-		flipDriveButton.whenPressed(new FlipDrive());
+		flipDriveButton = new JoystickButton(xboxController, 7); //button 7 is Back
+		flipDriveButton.whenPressed(new FlipDrive());		
 	}
 
 	public Joystick getxboxController () {

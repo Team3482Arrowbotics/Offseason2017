@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	SendableChooser<Command> autoChooser;
 	public Command autonomousCommand;
+	public int wait;
 	
 	public void robotInit() {
 		
@@ -87,6 +88,9 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 			shooterSpeed=-.7;
+			wait=0;
+			chassis.front=1;
+			SmartDashboard.putString("Robot Orientation", "Intake Forward");
 	}
 	
 	
@@ -101,13 +105,16 @@ public class Robot extends IterativeRobot {
 			RobotMap.climber.set(0);
 		}
 		
-		if(oi.xboxController.getPOV() == 0 && shooterSpeed>-.9)      //*EXPERIMENTAL*
-		{															 //*
-			shooterSpeed-=.25;										 //*Meant to raise/lower shooter speed using up/down on D Pad*
-		}															 //*Same as right trigger, isn't a button but a POV so it gives angles 0-315*
-		else if(oi.xboxController.getPOV()==180 && shooterSpeed<-.6) //*Up is 0, Right is 90, Down is 180, Left is 270, half intervals at 45 degrees from whole*
-		{															 //*
-			shooterSpeed+=.25;										 //*EXPERIMENTAL*
+		wait++;
+		if(oi.xboxController.getPOV() == 0 && shooterSpeed>-.9 && wait>10)      
+		{										 //*EXPERIMENTAL*
+			shooterSpeed-=.025;					 //*Meant to raise/lower shooter speed using up/down on D Pad*
+			wait=0;								 //*Same as right trigger, isn't a button but a POV so it gives angles 0-315*
+		}										 //*Up is 0, Right is 90, Down is 180, Left is 270, half intervals at 45s*
+		else if(oi.xboxController.getPOV()==180 && shooterSpeed<-.6 && wait>10) 
+		{										 //*
+			shooterSpeed+=.025;					 //*EXPERIMENTAL*
+			wait=0;
 		}
 		
 		SmartDashboard.putNumber("D-Pad: ", oi.xboxController.getPOV());         //Displays relevant info on SmartDashboard

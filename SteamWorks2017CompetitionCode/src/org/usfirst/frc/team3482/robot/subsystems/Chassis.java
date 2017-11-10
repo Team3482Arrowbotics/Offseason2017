@@ -23,7 +23,7 @@ public class Chassis extends Subsystem {
 
 	private final RobotDrive robotDrive = RobotMap.driveRobot;
 	double turnSpeed = -0.75;
-	int front = 1;
+	public int front = 1;
 	
 	public void drive(Joystick s) {
 		double deadZone = 0.1;

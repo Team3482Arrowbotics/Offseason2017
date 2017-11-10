@@ -36,12 +36,12 @@ public class RobotMap {
 	public static CANTalon feederWheels;
 
 	public static void init() {
-		driveRobot = new RobotDrive(rearLeft, frontLeft, rearRight, frontRight);
-		driveRobot.setSafetyEnabled(false);
 		rearLeft = new CANTalon(5);
 		frontLeft = new CANTalon(6);
 		rearRight = new CANTalon(7);
 		frontRight = new CANTalon(4);
+		driveRobot = new RobotDrive(rearLeft, frontLeft, rearRight, frontRight);
+		driveRobot.setSafetyEnabled(false);
 		gearManipulator = new CANTalon(11);
 		gearManipulatorWheels = new CANTalon(10);
 		intake = new CANTalon(8);
